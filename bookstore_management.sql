@@ -164,3 +164,102 @@ Expected Output:
 +--------------+
 5 rows in set
 */
+
+
+-- ========================================================
+-- Section 2: Filtering Data
+-- ========================================================
+
+-- Task 5: Display books priced above ₹700.
+SELECT * 
+FROM Books 
+WHERE price > 700;
+/*
+Expected Output:
++---------+---------------------------------------+-----------+--------------+--------+----------------+
+| book_id | title                                 | author_id | category     | price  | published_year |
++---------+---------------------------------------+-----------+--------------+--------+----------------+
+|     101 | System Design Fundamentals            |         2 | Programming  | 850.00 |           2021 |
+|     102 | SQL Essentials and Internals          |         1 | Programming  | 750.00 |           2022 |
+|     104 | Designing Data-Intensive Applications |         2 | Data Science | 920.00 |           2017 |
+|     106 | Big Data Analytics Mastery            |         6 | Data Science | 780.00 |           2022 |
++---------+---------------------------------------+-----------+--------------+--------+----------------+
+4 rows in set
+*/
+
+-- Task 6: Display books priced between ₹500 and ₹800.
+SELECT * 
+FROM Books 
+WHERE price BETWEEN 500 AND 800;
+/*
+Expected Output:
++---------+---------------------------------------+-----------+--------------+--------+----------------+
+| book_id | title                                 | author_id | category     | price  | published_year |
++---------+---------------------------------------+-----------+--------------+--------+----------------+
+|     102 | SQL Essentials and Internals          |         1 | Programming  | 750.00 |           2022 |
+|     103 | Clean Architecture Principles         |         1 | Programming  | 620.00 |           2019 |
+|     105 | Statistical Learning & AI             |         2 | Data Science | 680.00 |           2023 |
+|     106 | Big Data Analytics Mastery            |         6 | Data Science | 780.00 |           2022 |
+|     108 | Kafka on the Shore                    |         3 | Fiction      | 550.00 |           2020 |
+|     110 | Sapiens: A Brief History of Humankind |         4 | History      | 520.00 |           2018 |
+|     112 | The Structure of World History        |         6 | History      | 560.00 |           2024 |
+|     113 | Development as Freedom                |         5 | Business     | 580.00 |           2019 |
+|     114 | Scale: Universal Laws of Growth       |         6 | Business     | 640.00 |           2021 |
++---------+---------------------------------------+-----------+--------------+--------+----------------+
+9 rows in set
+*/
+
+-- Task 7: Display books that belong to the Programming category.
+SELECT * 
+FROM Books 
+WHERE category = 'Programming';
+/*
+Expected Output:
++---------+-------------------------------+-----------+-------------+--------+----------------+
+| book_id | title                         | author_id | category    | price  | published_year |
++---------+-------------------------------+-----------+-------------+--------+----------------+
+|     101 | System Design Fundamentals    |         2 | Programming | 850.00 |           2021 |
+|     102 | SQL Essentials and Internals  |         1 | Programming | 750.00 |           2022 |
+|     103 | Clean Architecture Principles |         1 | Programming | 620.00 |           2019 |
++---------+-------------------------------+-----------+-------------+--------+----------------+
+3 rows in set
+*/
+
+-- Task 8: Display books whose titles start with the letter S.
+SELECT * 
+FROM Books 
+WHERE title LIKE 'S%';
+/*
+Expected Output:
++---------+---------------------------------------+-----------+--------------+--------+----------------+
+| book_id | title                                 | author_id | category     | price  | published_year |
++---------+---------------------------------------+-----------+--------------+--------+----------------+
+|     101 | System Design Fundamentals            |         2 | Programming  | 850.00 |           2021 |
+|     102 | SQL Essentials and Internals          |         1 | Programming  | 750.00 |           2022 |
+|     105 | Statistical Learning & AI             |         2 | Data Science | 680.00 |           2023 |
+|     109 | South of the Border                   |         3 | Fiction      | 420.00 |           2021 |
+|     110 | Sapiens: A Brief History of Humankind |         4 | History      | 520.00 |           2018 |
+|     114 | Scale: Universal Laws of Growth       |         6 | Business     | 640.00 |           2021 |
++---------+---------------------------------------+-----------+--------------+--------+----------------+
+6 rows in set
+*/
+
+-- Task 9: Display books published after 2020.
+SELECT * 
+FROM Books 
+WHERE published_year > 2020;
+/*
+Expected Output:
++---------+---------------------------------+-----------+--------------+--------+----------------+
+| book_id | title                           | author_id | category     | price  | published_year |
++---------+---------------------------------+-----------+--------------+--------+----------------+
+|     101 | System Design Fundamentals      |         2 | Programming  | 850.00 |           2021 |
+|     102 | SQL Essentials and Internals    |         1 | Programming  | 750.00 |           2022 |
+|     105 | Statistical Learning & AI       |         2 | Data Science | 680.00 |           2023 |
+|     106 | Big Data Analytics Mastery      |         6 | Data Science | 780.00 |           2022 |
+|     109 | South of the Border             |         3 | Fiction      | 420.00 |           2021 |
+|     112 | The Structure of World History  |         6 | History      | 560.00 |           2024 |
+|     114 | Scale: Universal Laws of Growth |         6 | Business     | 640.00 |           2021 |
++---------+---------------------------------+-----------+--------------+--------+----------------+
+7 rows in set
+*/
