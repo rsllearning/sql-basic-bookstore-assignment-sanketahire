@@ -407,3 +407,111 @@ erDiagram
 
 > **Core Concept Highlight (WHERE vs. HAVING):**  
 > `WHERE` filters individual rows prior to grouping, whereas `HAVING` filters group partitions after aggregate computations have occurred. Aggregate expressions such as `AVG(price)` cannot appear inside a `WHERE` clause because grouping has not yet been executed at that stage of query evaluation.
+
+
+---
+
+### Section 6: Joins
+
+#### Task 15: Display each book along with its author's name using an INNER JOIN
+* **Description:** Combines records from `Books` and `Authors` based on relational key matching (`ON b.author_id = a.author_id`). Unmatched rows from either table are omitted.
+* **SQL Query:**
+  ```sql
+  SELECT 
+      b.book_id,
+      b.title,
+      a.author_name,
+      b.category,
+      b.price
+  FROM Books b
+  INNER JOIN Authors a 
+      ON b.author_id = a.author_id;
+  ```
+* **Execution Output:**
+  | book_id | title | author_name | category | price |
+  | :---: | :--- | :--- | :--- | :---: |
+  | 102 | SQL Essentials and Internals | Robert C. Martin | Programming | 750.00 |
+  | 103 | Clean Architecture Principles | Robert C. Martin | Programming | 620.00 |
+  | 101 | System Design Fundamentals | Martin Kleppmann | Programming | 850.00 |
+  | 104 | Designing Data-Intensive Applications | Martin Kleppmann | Data Science | 920.00 |
+  | 105 | Statistical Learning & AI | Martin Kleppmann | Data Science | 680.00 |
+  | 107 | Norwegian Wood | Haruki Murakami | Fiction | 450.00 |
+  | 108 | Kafka on the Shore | Haruki Murakami | Fiction | 550.00 |
+  | 109 | South of the Border | Haruki Murakami | Fiction | 420.00 |
+  | 110 | Sapiens: A Brief History of Humankind | Yuval Noah Harari | History | 520.00 |
+  | 111 | Homo Deus: A Brief History of Tomorrow | Yuval Noah Harari | History | 480.00 |
+  | 113 | Development as Freedom | Amartya Sen | Business | 580.00 |
+  | 106 | Big Data Analytics Mastery | Klaus Schwab | Data Science | 780.00 |
+  | 112 | The Structure of World History | Klaus Schwab | History | 560.00 |
+  | 114 | Scale: Universal Laws of Growth | Klaus Schwab | Business | 640.00 |
+  *(14 rows returned)*
+
+* **Execution Screenshot (Mandatory Deliverable):**
+  ![Task 15 Execution Output](screenshots/task_15_inner_join.png)
+
+#### Task 16: Display all authors along with the books they have written using a LEFT JOIN
+* **Description:** Preserves all records from the left relation (`Authors`). For authors without published books (such as Author 7: Margaret Atwood), corresponding book fields evaluate to `NULL`.
+* **SQL Query:**
+  ```sql
+  SELECT 
+      a.author_id,
+      a.author_name,
+      a.country,
+      b.title,
+      b.price
+  FROM Authors a
+  LEFT JOIN Books b 
+      ON a.author_id = b.author_id;
+  ```
+* **Execution Output:**
+  | author_id | author_name | country | title | price |
+  | :---: | :--- | :--- | :--- | :---: |
+  | 1 | Robert C. Martin | USA | SQL Essentials and Internals | 750.00 |
+  | 1 | Robert C. Martin | USA | Clean Architecture Principles | 620.00 |
+  | 2 | Martin Kleppmann | UK | System Design Fundamentals | 850.00 |
+  | 2 | Martin Kleppmann | UK | Designing Data-Intensive Applications | 920.00 |
+  | 2 | Martin Kleppmann | UK | Statistical Learning & AI | 680.00 |
+  | 3 | Haruki Murakami | Japan | Norwegian Wood | 450.00 |
+  | 3 | Haruki Murakami | Japan | Kafka on the Shore | 550.00 |
+  | 3 | Haruki Murakami | Japan | South of the Border | 420.00 |
+  | 4 | Yuval Noah Harari | Israel | Sapiens: A Brief History of Humankind | 520.00 |
+  | 4 | Yuval Noah Harari | Israel | Homo Deus: A Brief History of Tomorrow | 480.00 |
+  | 5 | Amartya Sen | India | Development as Freedom | 580.00 |
+  | 6 | Klaus Schwab | Germany | Big Data Analytics Mastery | 780.00 |
+  | 6 | Klaus Schwab | Germany | The Structure of World History | 560.00 |
+  | 6 | Klaus Schwab | Germany | Scale: Universal Laws of Growth | 640.00 |
+  | 7 | Margaret Atwood | Canada | *NULL* | *NULL* |
+  *(15 rows returned)*
+
+#### Task 17: Display all books along with their author details using a RIGHT JOIN
+* **Description:** Guarantees preservation of all records from the right relation (`Books`), merging author details where relationships exist.
+* **SQL Query:**
+  ```sql
+  SELECT 
+      b.book_id,
+      b.title,
+      a.author_name,
+      a.country,
+      b.price
+  FROM Authors a
+  RIGHT JOIN Books b 
+      ON a.author_id = b.author_id;
+  ```
+* **Execution Output:**
+  | book_id | title | author_name | country | price |
+  | :---: | :--- | :--- | :--- | :---: |
+  | 101 | System Design Fundamentals | Martin Kleppmann | UK | 850.00 |
+  | 102 | SQL Essentials and Internals | Robert C. Martin | USA | 750.00 |
+  | 103 | Clean Architecture Principles | Robert C. Martin | USA | 620.00 |
+  | 104 | Designing Data-Intensive Applications | Martin Kleppmann | UK | 920.00 |
+  | 105 | Statistical Learning & AI | Martin Kleppmann | UK | 680.00 |
+  | 106 | Big Data Analytics Mastery | Klaus Schwab | Germany | 780.00 |
+  | 107 | Norwegian Wood | Haruki Murakami | Japan | 450.00 |
+  | 108 | Kafka on the Shore | Haruki Murakami | Japan | 550.00 |
+  | 109 | South of the Border | Haruki Murakami | Japan | 420.00 |
+  | 110 | Sapiens: A Brief History of Humankind | Yuval Noah Harari | Israel | 520.00 |
+  | 111 | Homo Deus: A Brief History of Tomorrow | Yuval Noah Harari | Israel | 480.00 |
+  | 112 | The Structure of World History | Klaus Schwab | Germany | 560.00 |
+  | 113 | Development as Freedom | Amartya Sen | India | 580.00 |
+  | 114 | Scale: Universal Laws of Growth | Klaus Schwab | Germany | 640.00 |
+  *(14 rows returned)*
