@@ -361,3 +361,49 @@ erDiagram
 
 * **Execution Screenshot (Mandatory Deliverable):**
   ![Task 12 Execution Output](screenshots/task_12_aggregate_functions.png)
+
+
+---
+
+### Section 5: GROUP BY and HAVING
+
+#### Task 13: Display the average book price for each category
+* **Description:** Groups records by genre classification (`GROUP BY category`) and computes the discrete arithmetic mean price per bucket.
+* **SQL Query:**
+  ```sql
+  SELECT 
+      category, 
+      ROUND(AVG(price), 2) AS `Average Price`
+  FROM Books
+  GROUP BY category;
+  ```
+* **Execution Output:**
+  | category | Average Price |
+  | :--- | :---: |
+  | Programming | 740.00 |
+  | Data Science | 793.33 |
+  | Fiction | 473.33 |
+  | History | 520.00 |
+  | Business | 610.00 |
+  *(5 rows returned)*
+
+#### Task 14: Display categories whose average book price exceeds ₹650
+* **Description:** Employs post-aggregation filtering (`HAVING AVG(price) > 650`) to restrict output strictly to categories with premium average valuation.
+* **SQL Query:**
+  ```sql
+  SELECT 
+      category, 
+      ROUND(AVG(price), 2) AS `Average Price`
+  FROM Books
+  GROUP BY category
+  HAVING AVG(price) > 650;
+  ```
+* **Execution Output:**
+  | category | Average Price |
+  | :--- | :---: |
+  | Programming | 740.00 |
+  | Data Science | 793.33 |
+  *(2 rows returned)*
+
+> **Core Concept Highlight (WHERE vs. HAVING):**  
+> `WHERE` filters individual rows prior to grouping, whereas `HAVING` filters group partitions after aggregate computations have occurred. Aggregate expressions such as `AVG(price)` cannot appear inside a `WHERE` clause because grouping has not yet been executed at that stage of query evaluation.

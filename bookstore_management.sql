@@ -335,3 +335,46 @@ Expected Output:
 +-------------+-------------+---------------+---------------+--------------+
 1 row in set
 */
+
+
+-- ========================================================
+-- Section 5: GROUP BY and HAVING
+-- ========================================================
+
+-- Task 13: Display the average book price for each category.
+SELECT 
+    category, 
+    ROUND(AVG(price), 2) AS `Average Price`
+FROM Books
+GROUP BY category;
+/*
+Expected Output:
++--------------+---------------+
+| category     | Average Price |
++--------------+---------------+
+| Programming  |        740.00 |
+| Data Science |        793.33 |
+| Fiction      |        473.33 |
+| History      |        520.00 |
+| Business     |        610.00 |
++--------------+---------------+
+5 rows in set
+*/
+
+-- Task 14: Display only those categories whose average book price is greater than ₹650.
+SELECT 
+    category, 
+    ROUND(AVG(price), 2) AS `Average Price`
+FROM Books
+GROUP BY category
+HAVING AVG(price) > 650;
+/*
+Expected Output:
++--------------+---------------+
+| category     | Average Price |
++--------------+---------------+
+| Programming  |        740.00 |
+| Data Science |        793.33 |
++--------------+---------------+
+2 rows in set
+*/
