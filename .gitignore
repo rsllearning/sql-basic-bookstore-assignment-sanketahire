@@ -1,0 +1,19 @@
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# MySQL Workbench workspace caches and temporary files
+*.mwb.bak
+*.workspace
+*.autosave
+
+# Temporary files and logs
+*.log
+*.tmp
+*.swp
+*~
+
+# IDE / Editor configurations
+.vscode/
+.idea/
