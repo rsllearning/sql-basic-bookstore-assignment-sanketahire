@@ -1,7 +1,20 @@
 # Online Bookstore Management System (SQL Basic Assignment)
 
-## Overview
-This repository contains the database implementation and SQL query solutions for the **SQL (Basic) Assignment**. The project models an online bookstore management system, covering relational schema design, data retrieval, multi-table joins, aggregate analytics, DML lifecycle management, and table constraints.
+## Assignment Overview
+
+### Problem Statement & Background
+You have been assigned to work as a **Database Developer** for an online bookstore. The bookstore maintains information about books and their authors in a relational database. The business team requires SQL queries to retrieve, analyze, and manage the data efficiently.
+
+### Objective
+The core objective of this project is to demonstrate a rigorous and complete understanding of SQL fundamentals, including:
+- **Relational Schema Modeling & Constraints:** Declaring tables with `PRIMARY KEY`, `FOREIGN KEY`, `NOT NULL`, `UNIQUE`, and `DEFAULT` constraints.
+- **Data Retrieval & Projection:** Basic querying, selecting specific attributes, and column aliasing.
+- **Predicate Filtering:** Numeric and textual comparison, inclusive range checking (`BETWEEN`), set membership (`IN`), pattern matching (`LIKE`), and temporal filtering.
+- **Sorting & Limiting:** Result ordering (`ORDER BY DESC`) and top-N row limiting (`LIMIT`).
+- **Aggregate Analytics & Grouping:** Multi-metric summary statistics (`COUNT`, `SUM`, `AVG`, `MIN`, `MAX`), bucketing via `GROUP BY`, and post-aggregation filtering via `HAVING`.
+- **Relational Joins:** Multi-table relational algebra using `INNER JOIN`, `LEFT JOIN` (with explicit `NULL` handling for unmatched entities), and `RIGHT JOIN`.
+- **Data Manipulation (DML Lifecycle):** Adding new records (`INSERT`), targeted record updates (`UPDATE`), and targeted record deletion (`DELETE`) with defensive primary key predicates.
+
 
 ---
 
@@ -15,9 +28,9 @@ sql-basic-bookstore-assignment-sanketahire/
 │   ├── Training.Assignment.SQL (Basic).pdf
 │   └── Training.Material.SQL (Basic).pdf
 └── screenshots/                        # Milestone execution proofs
-    ├── task_12_aggregate_functions.png # (To be captured in Section 4)
-    ├── task_15_inner_join.png          # (To be captured in Section 6)
-    └── task_21_create_table_publishers.png # (To be captured in Section 8)
+    ├── task_12_aggregate_functions.png # Verified execution screenshot (Task 12)
+    ├── task_15_inner_join.png          # Verified execution screenshot (Task 15)
+    └── task_21_create_table_publishers.png # Verified execution screenshot (Task 21)
 ```
 
 ---
@@ -43,6 +56,13 @@ erDiagram
         decimal price "Price in INR (NOT NULL)"
         int published_year "Publication Year (NOT NULL)"
     }
+
+    Publishers {
+        int publisher_id PK "Primary Key"
+        varchar publisher_name UK "Unique Publisher Name (NOT NULL)"
+        varchar country "Country (DEFAULT 'India', NOT NULL)"
+        int established_year "Established Year (NOT NULL)"
+    }
 ```
 
 ### Data Dictionary
@@ -64,20 +84,28 @@ erDiagram
 | `price` | `DECIMAL(10,2)` | `NOT NULL` | Price in INR (exact decimal precision) |
 | `published_year` | `INT` | `NOT NULL` | Year the book was published |
 
+#### 3. `Publishers` Table (Section 8 - Task 21)
+| Column Name | Data Type | Constraints | Description |
+| :--- | :--- | :--- | :--- |
+| `publisher_id` | `INT` | `PRIMARY KEY` | Unique identifier for each publishing house |
+| `publisher_name` | `VARCHAR(100)` | `NOT NULL`, `UNIQUE` | Distinct registered publisher name |
+| `country` | `VARCHAR(50)` | `NOT NULL`, `DEFAULT 'India'` | Country of headquarters (defaults to 'India') |
+| `established_year` | `INT` | `NOT NULL` | Founding calendar year |
+
 ---
 
 ## Steps to Execute the SQL Script
 
 ### Option A: Using MySQL Workbench (GUI)
 1. Open **MySQL Workbench** and connect to your local MySQL server.
-2. Go to **File** $\rightarrow$ **Open SQL Script...** and select [`bookstore_management.sql`](file:///Users/sanket.ahire/Downloads/sql-basic-bookstore-assignment-sanketahire/bookstore_management.sql).
+2. Go to **File** $\rightarrow$ **Open SQL Script...** and select [`bookstore_management.sql`](./bookstore_management.sql) from the repository root.
 3. Click the **Execute (⚡)** button to run the entire script.
 4. Review the generated result grids in the Output tabs.
 
 ### Option B: Using MySQL Terminal / Command Line (CLI)
-1. Open your terminal and navigate to the project directory:
+1. Open your terminal and navigate to the cloned repository directory:
    ```bash
-   cd /path/to/sql-basic-bookstore-assignment-sanketahire
+   cd sql-basic-bookstore-assignment-sanketahire
    ```
 2. Execute the master script directly into MySQL:
    ```bash
@@ -603,3 +631,20 @@ erDiagram
 
 * **Execution Screenshot (Mandatory Deliverable):**
   ![Task 21 Execution Output](screenshots/task_21_create_table_publishers.png)
+
+
+---
+
+## Summary & Core Concepts Applied
+
+| Section | Tasks Covered | Core SQL Concepts & Engineering Principles Demonstrated |
+| :--- | :---: | :--- |
+| **Schema Setup** | — | Relational modeling, DDL (`CREATE DATABASE`, `CREATE TABLE`), Entity Integrity (`PRIMARY KEY`), Referential Integrity (`FOREIGN KEY ... REFERENCES ... ON UPDATE CASCADE ON DELETE SET NULL`). |
+| **Section 1: Basic Queries** | Tasks 1–4 | Projection (`SELECT`), Quoted Column Aliasing (`AS \`Book Name\``), Deduplication (`DISTINCT`). |
+| **Section 2: Filtering Data** | Tasks 5–9 | Row filtering (`WHERE`), Numeric comparison (`>`), Inclusive range filtering (`BETWEEN`), String equality, Pattern matching (`LIKE 'S%'`), Temporal filtering (`> 2020`). |
+| **Section 3: Sorting & Limiting** | Tasks 10–11 | Result set ordering (`ORDER BY ... DESC`), Cardinality restriction / Top-N slicing (`LIMIT 3`). |
+| **Section 4: Aggregate Functions** | Task 12 | Multi-metric aggregation (`COUNT`, `SUM`, `AVG`, `MAX`, `MIN`), Currency precision rounding (`ROUND`). *[Mandatory Execution Screenshot Verified]* |
+| **Section 5: GROUP BY and HAVING** | Tasks 13–14 | Partitioned aggregation (`GROUP BY category`), Post-aggregation group filtering (`HAVING AVG(price) > 650`), Execution Order distinction (`WHERE` vs. `HAVING`). |
+| **Section 6: Joins** | Tasks 15–17 | Relational algebra: `INNER JOIN` (intersection), `LEFT JOIN` (preserving all left entities with `NULL` representation for unmatched authors), `RIGHT JOIN` (preserving all right publications). *[Mandatory Execution Screenshot Verified]* |
+| **Section 7: Data Manipulation** | Tasks 18–20 | DML lifecycle: `INSERT`, targeted `UPDATE`, targeted `DELETE` with Primary Key predicates, defensive verification (`SELECT` state checks), unbounded DML prevention. |
+| **Section 8: Creating Tables & Constraints** | Task 21 | Advanced schema declaration applying 4 mandatory constraints: `PRIMARY KEY`, `NOT NULL`, `UNIQUE`, and `DEFAULT`. *[Mandatory Execution Screenshot Verified]* |
