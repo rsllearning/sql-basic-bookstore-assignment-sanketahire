@@ -569,3 +569,37 @@ erDiagram
 
 > **Critical Safety Rule (Unbounded DML Prevention):**  
 > `UPDATE` and `DELETE` operations executed without an explicit `WHERE` clause will modify or wipe **every record** in the table. In professional database administration, queries must always be qualified with an exact primary key or indexed predicate, preceded by a dry-run `SELECT` inspection.
+
+
+---
+
+### Section 8: Creating Tables and Constraints
+
+#### Task 21: Create a new table named Publishers with enterprise constraints
+* **Description:** Declares the `Publishers` entity schema applying four mandatory relational constraints:
+  * `PRIMARY KEY`: Applied on `publisher_id` to guarantee unique entity identification and prohibit `NULL`.
+  * `NOT NULL`: Applied on `publisher_name`, `country`, and `established_year` ensuring mandatory presence of data.
+  * `UNIQUE`: Applied on `publisher_name` ensuring no two publisher entities share identical names.
+  * `DEFAULT`: Applied on `country` with fallback literal `'India'`.
+* **SQL Query:**
+  ```sql
+  CREATE TABLE Publishers (
+      publisher_id     INT PRIMARY KEY,
+      publisher_name   VARCHAR(100) NOT NULL UNIQUE,
+      country          VARCHAR(50) NOT NULL DEFAULT 'India',
+      established_year INT NOT NULL
+  );
+
+  -- Verification Query:
+  DESCRIBE Publishers;
+  ```
+* **Execution Output (`DESCRIBE Publishers;`):**
+  | Field | Type | Null | Key | Default | Extra | Applied Constraint |
+  | :--- | :--- | :---: | :---: | :---: | :--- | :--- |
+  | `publisher_id` | int | NO | PRI | NULL | | `PRIMARY KEY` |
+  | `publisher_name` | varchar(100) | NO | UNI | NULL | | `NOT NULL`, `UNIQUE` |
+  | `country` | varchar(50) | NO | | India | | `NOT NULL`, `DEFAULT 'India'` |
+  | `established_year` | int | NO | | NULL | | `NOT NULL` |
+
+* **Execution Screenshot (Mandatory Deliverable):**
+  ![Task 21 Execution Output](screenshots/task_21_create_table_publishers.png)

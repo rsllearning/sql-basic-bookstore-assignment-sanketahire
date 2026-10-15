@@ -538,3 +538,48 @@ WHERE book_id = 115;
 Expected Output:
 Empty set (0 rows returned)
 */
+
+
+-- ========================================================
+-- Section 8: Creating Tables and Constraints
+-- ========================================================
+
+-- Task 21: Create a new table named Publishers with PRIMARY KEY, NOT NULL, UNIQUE, and DEFAULT constraints.
+CREATE TABLE Publishers (
+    publisher_id     INT PRIMARY KEY,
+    publisher_name   VARCHAR(100) NOT NULL UNIQUE,
+    country          VARCHAR(50) NOT NULL DEFAULT 'India',
+    established_year INT NOT NULL
+);
+
+-- Verification for Task 21: Display table schema and constraint definitions
+DESCRIBE Publishers;
+/*
+Expected Output:
++------------------+--------------+------+-----+---------+-------+
+| Field            | Type         | Null | Key | Default | Extra |
++------------------+--------------+------+-----+---------+-------+
+| publisher_id     | int          | NO   | PRI | NULL    |       |
+| publisher_name   | varchar(100) | NO   | UNI | NULL    |       |
+| country          | varchar(50)  | NO   |     | India   |       |
+| established_year | int          | NO   |     | NULL    |       |
++------------------+--------------+------+-----+---------+-------+
+4 rows in set
+*/
+
+-- Optional Verification: Insert sample record verifying DEFAULT constraint
+INSERT INTO Publishers (publisher_id, publisher_name, established_year) 
+VALUES (1, 'O''Reilly Media', 1980);
+
+SELECT * 
+FROM Publishers 
+WHERE publisher_id = 1;
+/*
+Expected Output:
++--------------+----------------+---------+------------------+
+| publisher_id | publisher_name | country | established_year |
++--------------+----------------+---------+------------------+
+|            1 | O'Reilly Media | India   |             1980 |
++--------------+----------------+---------+------------------+
+1 row in set
+*/
