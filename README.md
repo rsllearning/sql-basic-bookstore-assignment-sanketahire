@@ -335,3 +335,29 @@ erDiagram
   | 101 | System Design Fundamentals | 2 | Programming | 850.00 | 2021 |
   | 106 | Big Data Analytics Mastery | 6 | Data Science | 780.00 | 2022 |
   *(3 rows returned)*
+
+
+---
+
+### Section 4: Aggregate Functions
+
+#### Task 12: Multi-metric statistical calculations
+* **Description:** Calculates the total volume of catalog items (`COUNT(*)`), cumulative valuation (`SUM(price)`), mean price (`ROUND(AVG(price), 2)`), and price extremes (`MAX(price)`, `MIN(price)`).
+* **SQL Query:**
+  ```sql
+  SELECT 
+      COUNT(*)                AS `Total Books`,
+      SUM(price)              AS `Total Price`,
+      ROUND(AVG(price), 2)    AS `Average Price`,
+      MAX(price)              AS `Highest Price`,
+      MIN(price)              AS `Lowest Price`
+  FROM Books;
+  ```
+* **Execution Output:**
+  | Total Books | Total Price | Average Price | Highest Price | Lowest Price |
+  | :---: | :---: | :---: | :---: | :---: |
+  | 14 | 8800.00 | 628.57 | 920.00 | 420.00 |
+  *(1 row returned)*
+
+* **Execution Screenshot (Mandatory Deliverable):**
+  ![Task 12 Execution Output](screenshots/task_12_aggregate_functions.png)

@@ -312,3 +312,26 @@ Expected Output:
 +---------+---------------------------------------+-----------+--------------+--------+----------------+
 3 rows in set
 */
+
+
+-- ========================================================
+-- Section 4: Aggregate Functions
+-- ========================================================
+
+-- Task 12: Find total number of books, total price, average price, highest price, and lowest price.
+SELECT 
+    COUNT(*)                AS `Total Books`,
+    SUM(price)              AS `Total Price`,
+    ROUND(AVG(price), 2)    AS `Average Price`,
+    MAX(price)              AS `Highest Price`,
+    MIN(price)              AS `Lowest Price`
+FROM Books;
+/*
+Expected Output:
++-------------+-------------+---------------+---------------+--------------+
+| Total Books | Total Price | Average Price | Highest Price | Lowest Price |
++-------------+-------------+---------------+---------------+--------------+
+|          14 |     8800.00 |        628.57 |        920.00 |       420.00 |
++-------------+-------------+---------------+---------------+--------------+
+1 row in set
+*/
