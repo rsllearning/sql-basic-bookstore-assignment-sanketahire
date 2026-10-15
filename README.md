@@ -286,3 +286,52 @@ erDiagram
   | 112 | The Structure of World History | 6 | History | 560.00 | 2024 |
   | 114 | Scale: Universal Laws of Growth | 6 | Business | 640.00 | 2021 |
   *(7 rows returned)*
+
+
+---
+
+### Section 3: Sorting and Limiting Results
+
+#### Task 10: Display books sorted by price in descending order
+* **Description:** Orders the entire book catalog from highest to lowest monetary value (`ORDER BY price DESC`).
+* **SQL Query:**
+  ```sql
+  SELECT * 
+  FROM Books 
+  ORDER BY price DESC;
+  ```
+* **Execution Output:**
+  | book_id | title | author_id | category | price | published_year |
+  | :---: | :--- | :---: | :--- | :---: | :---: |
+  | 104 | Designing Data-Intensive Applications | 2 | Data Science | 920.00 | 2017 |
+  | 101 | System Design Fundamentals | 2 | Programming | 850.00 | 2021 |
+  | 106 | Big Data Analytics Mastery | 6 | Data Science | 780.00 | 2022 |
+  | 102 | SQL Essentials and Internals | 1 | Programming | 750.00 | 2022 |
+  | 105 | Statistical Learning & AI | 2 | Data Science | 680.00 | 2023 |
+  | 114 | Scale: Universal Laws of Growth | 6 | Business | 640.00 | 2021 |
+  | 103 | Clean Architecture Principles | 1 | Programming | 620.00 | 2019 |
+  | 113 | Development as Freedom | 5 | Business | 580.00 | 2019 |
+  | 112 | The Structure of World History | 6 | History | 560.00 | 2024 |
+  | 108 | Kafka on the Shore | 3 | Fiction | 550.00 | 2020 |
+  | 110 | Sapiens: A Brief History of Humankind | 4 | History | 520.00 | 2018 |
+  | 111 | Homo Deus: A Brief History of Tomorrow | 4 | History | 480.00 | 2019 |
+  | 107 | Norwegian Wood | 3 | Fiction | 450.00 | 2018 |
+  | 109 | South of the Border | 3 | Fiction | 420.00 | 2021 |
+  *(14 rows returned)*
+
+#### Task 11: Display the top 3 most expensive books
+* **Description:** Combines descending price ordering with row-limiting cardinality (`LIMIT 3`) to yield the top three premium catalog entries.
+* **SQL Query:**
+  ```sql
+  SELECT * 
+  FROM Books 
+  ORDER BY price DESC 
+  LIMIT 3;
+  ```
+* **Execution Output:**
+  | book_id | title | author_id | category | price | published_year |
+  | :---: | :--- | :---: | :--- | :---: | :---: |
+  | 104 | Designing Data-Intensive Applications | 2 | Data Science | 920.00 | 2017 |
+  | 101 | System Design Fundamentals | 2 | Programming | 850.00 | 2021 |
+  | 106 | Big Data Analytics Mastery | 6 | Data Science | 780.00 | 2022 |
+  *(3 rows returned)*
