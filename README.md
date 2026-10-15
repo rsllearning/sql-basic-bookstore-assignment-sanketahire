@@ -515,3 +515,57 @@ erDiagram
   | 113 | Development as Freedom | Amartya Sen | India | 580.00 |
   | 114 | Scale: Universal Laws of Growth | Klaus Schwab | Germany | 640.00 |
   *(14 rows returned)*
+
+
+---
+
+### Section 7: Data Manipulation (DML Lifecycle)
+
+#### Task 18: Insert a new book into the Books table
+* **Description:** Appends a discrete publication record (`book_id = 115`) into the catalog with associated author linkage.
+* **SQL Query:**
+  ```sql
+  INSERT INTO Books (book_id, title, author_id, category, price, published_year) 
+  VALUES (115, 'Database Internals & Storage Engines', 2, 'Programming', 720.00, 2023);
+
+  -- Verification Query:
+  SELECT * FROM Books WHERE book_id = 115;
+  ```
+* **Execution Output:**
+  | book_id | title | author_id | category | price | published_year |
+  | :---: | :--- | :---: | :--- | :---: | :---: |
+  | 115 | Database Internals & Storage Engines | 2 | Programming | 720.00 | 2023 |
+  *(1 row inserted)*
+
+#### Task 19: Update the price of the newly inserted book
+* **Description:** Mutates the price attribute from ₹720.00 to ₹799.00 using a targeted Primary Key predicate (`WHERE book_id = 115`).
+* **SQL Query:**
+  ```sql
+  UPDATE Books 
+  SET price = 799.00 
+  WHERE book_id = 115;
+
+  -- Verification Query:
+  SELECT * FROM Books WHERE book_id = 115;
+  ```
+* **Execution Output:**
+  | book_id | title | author_id | category | price | published_year |
+  | :---: | :--- | :---: | :--- | :---: | :---: |
+  | 115 | Database Internals & Storage Engines | 2 | Programming | 799.00 | 2023 |
+  *(1 row updated)*
+
+#### Task 20: Delete the newly inserted book record
+* **Description:** Permanently purges the test record using a targeted Primary Key predicate (`WHERE book_id = 115`).
+* **SQL Query:**
+  ```sql
+  DELETE FROM Books 
+  WHERE book_id = 115;
+
+  -- Verification Query:
+  SELECT * FROM Books WHERE book_id = 115;
+  ```
+* **Execution Output:**
+  *Empty set (0 rows returned — confirms record was successfully purged).*
+
+> **Critical Safety Rule (Unbounded DML Prevention):**  
+> `UPDATE` and `DELETE` operations executed without an explicit `WHERE` clause will modify or wipe **every record** in the table. In professional database administration, queries must always be qualified with an exact primary key or indexed predicate, preceded by a dry-run `SELECT` inspection.

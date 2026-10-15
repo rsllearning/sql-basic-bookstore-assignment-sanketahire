@@ -483,3 +483,58 @@ Expected Output:
 +---------+----------------------------------------+-------------------+---------+--------+
 14 rows in set
 */
+
+
+-- ========================================================
+-- Section 7: Data Manipulation
+-- ========================================================
+
+-- Task 18: Insert a new book into the Books table.
+INSERT INTO Books (book_id, title, author_id, category, price, published_year) 
+VALUES (115, 'Database Internals & Storage Engines', 2, 'Programming', 720.00, 2023);
+
+-- Verification for Task 18: Confirm row insertion
+SELECT * 
+FROM Books 
+WHERE book_id = 115;
+/*
+Expected Output:
++---------+--------------------------------------+-----------+-------------+--------+----------------+
+| book_id | title                                | author_id | category    | price  | published_year |
++---------+--------------------------------------+-----------+-------------+--------+----------------+
+|     115 | Database Internals & Storage Engines |         2 | Programming | 720.00 |           2023 |
++---------+--------------------------------------+-----------+-------------+--------+----------------+
+1 row in set
+*/
+
+-- Task 19: Update the price of the book you inserted.
+UPDATE Books 
+SET price = 799.00 
+WHERE book_id = 115;
+
+-- Verification for Task 19: Confirm price update
+SELECT * 
+FROM Books 
+WHERE book_id = 115;
+/*
+Expected Output:
++---------+--------------------------------------+-----------+-------------+--------+----------------+
+| book_id | title                                | author_id | category    | price  | published_year |
++---------+--------------------------------------+-----------+-------------+--------+----------------+
+|     115 | Database Internals & Storage Engines |         2 | Programming | 799.00 |           2023 |
++---------+--------------------------------------+-----------+-------------+--------+----------------+
+1 row in set
+*/
+
+-- Task 20: Delete the book record that you inserted.
+DELETE FROM Books 
+WHERE book_id = 115;
+
+-- Verification for Task 20: Confirm record removal
+SELECT * 
+FROM Books 
+WHERE book_id = 115;
+/*
+Expected Output:
+Empty set (0 rows returned)
+*/
